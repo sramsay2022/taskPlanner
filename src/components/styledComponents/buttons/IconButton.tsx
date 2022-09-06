@@ -1,4 +1,4 @@
-import './IconButton.scss'
+import './IconButton.css'
 
 export enum Icon {
   DELETE = 'delete',

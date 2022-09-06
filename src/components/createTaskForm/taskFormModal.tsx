@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap"
 import TaskForm from "./TaskForm"
 
 
-interface TaskFormModalProps {
+ interface TaskFormModalProps {
     show: boolean
     onHide: () => void
 }
@@ -12,6 +12,9 @@ export default function TaskFormModal(props: TaskFormModalProps){
 
     const { show, onHide } = props
 
+    const handleSubmit = () =>{
+        
+    }
     return (
         <div>
         <Modal show={show} onHide={onHide} size="lg" backdrop="static">

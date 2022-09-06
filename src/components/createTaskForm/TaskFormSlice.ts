@@ -32,6 +32,6 @@ const initialState = {
 
   })
 
-  export const {clearState, createTask } =  TaskFormSlice.actions
+  export const {clearState, createTask, deleteTask } =  TaskFormSlice.actions
   export default TaskFormSlice.reducer
 

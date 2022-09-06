@@ -2,15 +2,12 @@ import React, { KeyboardEvent, useState } from "react";
 import { addYears, compareDesc, format, startOfYesterday } from 'date-fns'
 import { Form } from 'react-bootstrap'
 import { CODE_ENTER } from 'keycode-js'
-
 import { DATE_FUTURE_LIMIT_MESSAGE, DATE_PAST_LIMIT_MESSAGE, TITLE_EMPTY_MESSAGE, TITLE_TOO_LOND_MESSAGE } from './constants'
 import TextButton, { ButtonVariant } from "../styledComponents/buttons/TextButton";
 import './TaskForm.css'
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { useNavigate } from "react-router-dom";
+import { useAppDispatch} from "../../store/hooks";
 import { createTask } from "./TaskFormSlice";
 import { TaskObject } from "../types/objects";
-import {getTasks} from './TaskFormSelectors'
 
 
 
@@ -95,6 +92,8 @@ export default function TaskForm() {
       dispatch(createTask(generateDataPacket()))
       console.log("Form is valid")
       console.log(generateDataPacket())
+
+      
     }
   }
 
