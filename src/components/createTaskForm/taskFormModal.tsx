@@ -11,9 +11,9 @@ import TaskForm from "./TaskForm"
 export default function TaskFormModal(props: TaskFormModalProps){
 
     const { show, onHide } = props
-
+    
     const handleSubmit = () =>{
-        
+        onHide()
     }
     return (
         <div>
@@ -21,8 +21,8 @@ export default function TaskFormModal(props: TaskFormModalProps){
                 <Modal.Header closeButton>
                     <Modal.Title>Create Task</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <TaskForm />
+                <Modal.Body onSubmit={handleSubmit}>
+                    <TaskForm onHide={onHide}/>
                 </Modal.Body>
                 
             </Modal>

@@ -9,9 +9,12 @@ import { useAppDispatch} from "../../store/hooks";
 import { createTask } from "./TaskFormSlice";
 import { TaskObject } from "../types/objects";
 
+interface TaskFormProps {
 
+  onHide: () => void
+}
 
-export default function TaskForm() {
+export default function TaskForm(props: TaskFormProps) {
 
   const [titleErrMsg, setTitleErrMsg] = useState('')
   const [taskTitle, setTaskTitle] = useState("New Task")
@@ -26,11 +29,10 @@ export default function TaskForm() {
   const isValidDate = dateErrMsg === ''
   const isValidForm = isValidTitle && isValidDate
 
-
+  const hide = props.onHide
 
 
   const dispatch = useAppDispatch()
-  //const task = useAppSelector(getTasks)
 
 
 
@@ -92,8 +94,8 @@ export default function TaskForm() {
       dispatch(createTask(generateDataPacket()))
       console.log("Form is valid")
       console.log(generateDataPacket())
-
-      
+      hide()
+        
     }
   }
 

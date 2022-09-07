@@ -1,21 +1,20 @@
 import { ListGroup } from "react-bootstrap"
 import IconButton, { Icon } from "../styledComponents/buttons/IconButton"
-import { TaskObject } from "../types/objects"
 import { Id } from "../types/taskTypes"
 import './Tasks.css'
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { getTasks } from "../createTaskForm/TaskFormSelectors";
+import { deleteTask } from "../createTaskForm/TaskFormSlice";
 
 
-type TaskListProps = {
-    tasks: Array<TaskObject>
-    handleDeleteTask: (id: Id) => void
-}
+export default function Tasks() {
 
-export default function Tasks(props: TaskListProps) {
+    const tasks = useAppSelector(getTasks)
+    const dispatch = useAppDispatch()
 
-    const { tasks, handleDeleteTask } = props
-
-
-
+    const handleDeleteTask = (id: Id) => {
+        dispatch(deleteTask(id))
+    }
 
     return (
         <div>
