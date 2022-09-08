@@ -19,10 +19,10 @@ export default function Tasks() {
     return (
         <div>
             <ListGroup className="list-tasks">
-                {tasks.map(({ id }) => {
+                {tasks.map(({ id, name }) => {
                     return (
                         <ListGroup.Item key={id}>
-                            {id}
+                            {name}
                             <div className="deleteButtonWrapper">
                                 <IconButton
                                     icon={Icon.CROSS}
