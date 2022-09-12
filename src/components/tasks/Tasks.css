@@ -1,9 +1,23 @@
-.list-emails {
+.list-tasks {
     max-height: 300px;
     overflow-y: auto;
-    margin-top: 4px;
+    overflow-wrap: break-all;
+
+    
   }
   
   .deleteButtonWrapper {
     float: right;
+    text-align: right;
+    
+  }
+
+  #title {
+    text-align: center;
+    text-decoration-line: underline;
+    background-color: rgb(60, 191, 235);
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    
+    
   }

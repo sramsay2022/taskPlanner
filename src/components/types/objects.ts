@@ -3,7 +3,7 @@ import { Id } from './taskTypes'
 export interface TaskObject {
   id: Id
   name: string
-  date: Date  
+  date: number  
   urgent: Boolean
   notes: String
 }

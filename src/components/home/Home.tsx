@@ -4,6 +4,7 @@ import './Home.css'
 import TextButton from "../styledComponents/buttons/TextButton";
 import TaskFormModal from "../createTaskForm/taskFormModal";
 import Tasks from "../tasks/Tasks";
+import NavBar from "../navBar/navBar";
 
 
 
@@ -23,6 +24,8 @@ export default function Home() {
 
     return (
         <div>
+            <NavBar/>
+            <br/>
             <div id="btn">
                 <TextButton
                     text="Create new task"
@@ -30,7 +33,7 @@ export default function Home() {
                 />
             </div>
             <TaskFormModal show={showModal} onHide={handleShowModal} />
-            <div>
+            <div className="task-list-container">
                 <Tasks/>
             </div>
 

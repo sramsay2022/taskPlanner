@@ -5,9 +5,11 @@ import { CODE_ENTER } from 'keycode-js'
 import { DATE_FUTURE_LIMIT_MESSAGE, DATE_PAST_LIMIT_MESSAGE, TITLE_EMPTY_MESSAGE, TITLE_TOO_LOND_MESSAGE } from './constants'
 import TextButton, { ButtonVariant } from "../styledComponents/buttons/TextButton";
 import './TaskForm.css'
-import { useAppDispatch} from "../../store/hooks";
+import { useAppDispatch } from "../../store/hooks";
 import { createTask } from "./TaskFormSlice";
 import { TaskObject } from "../types/objects";
+
+
 
 interface TaskFormProps {
 
@@ -52,34 +54,44 @@ export default function TaskForm(props: TaskFormProps) {
   }
 
   const validateTitle = (title: string) => {
-      if(title.length === 0){
-        setValidTitle(false)
-        setTitleErrMsg(TITLE_EMPTY_MESSAGE)
-      }
-      else if(title.length >= 100){
-        setValidTitle(false)
-        setTitleErrMsg(TITLE_TOO_LOND_MESSAGE)
-      }
-      else{
-        setValidTitle(true)
-        setTitleErrMsg('')
-      }
+    if (title.length === 0) {
+      setValidTitle(false)
+      setTitleErrMsg(TITLE_EMPTY_MESSAGE)
+    }
+    else if (title.length >= 100) {
+      setValidTitle(false)
+      setTitleErrMsg(TITLE_TOO_LOND_MESSAGE)
+    }
+    else {
+      setValidTitle(true)
+      setTitleErrMsg('')
+    }
 
   }
+
+  //UUID would not import correctly so found one on stackoverflow
+  const uuid = () =>
+  "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0,
+      v = c === "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+  
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     validateTitle(event.target.value)
     setTaskTitle(event.target.value)
-    if(event.target.value === ""){
+    if (event.target.value === "") {
       setTaskTitle("Unnamed Task")
     }
-    
+
   }
   const generateDataPacket = (): TaskObject => {
+    const myUUID = uuid()
     return {
-      id: '',
+      id: myUUID,
       name: taskTitle,
-      date: new Date(date),
+      date: new Date(date).getTime(),
       notes: note,
       urgent: urgent
     }
@@ -95,7 +107,7 @@ export default function TaskForm(props: TaskFormProps) {
       console.log("Form is valid")
       console.log(generateDataPacket())
       hide()
-        
+
     }
   }
 
@@ -116,53 +128,53 @@ export default function TaskForm(props: TaskFormProps) {
 
   return (
     <div>
-    <Form onSubmit={handleSubmit} onKeyPress={handleKeyPress}className="form">
-      
-      <Form.Group>
-        <Form.Label className="title">{taskTitle}</Form.Label>
-        <Form.Control 
-        placeholder="Title" 
-        onChange={handleTitleChange}
-        isInvalid={!isValidTitle}
-        maxLength={100}
-        required
-        />
-        <Form.Control.Feedback type="invalid">
-            {titleErrMsg}
-          </Form.Control.Feedback>
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>
-         Date Due
+      <Form onSubmit={handleSubmit} onKeyPress={handleKeyPress} className="form">
+
+        <Form.Group>
+          <Form.Label className="title">{taskTitle}</Form.Label>
           <Form.Control
-            type="date"
-            name="Task Date"
-            onChange={handleDateChange}
-            isInvalid={!isValidDate}
-            value={date}
+            placeholder="Title"
+            onChange={handleTitleChange}
+            isInvalid={!isValidTitle}
+            maxLength={100}
+            required
           />
           <Form.Control.Feedback type="invalid">
-            {dateErrMsg}
+            {titleErrMsg}
           </Form.Control.Feedback>
-        </Form.Label>
-      </Form.Group>
-      <Form.Group>
-        <Form.Check type="checkbox" label="Urgent" onChange={handleUrgent}/>
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>Notes</Form.Label>
-        <Form.Control placeholder="Notes"
-        onChange={handleNoteChange}
-        />
-      </Form.Group>
-      <TextButton text="Submit"
-        onClick={handleSubmit}
-        disabled={!isValidForm}
-        variant={
-          !isValidForm ? ButtonVariant.OUTLINEDANGER : ButtonVariant.PRIMARY
-        } />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>
+            Date Due
+            <Form.Control
+              type="date"
+              name="Task Date"
+              onChange={handleDateChange}
+              isInvalid={!isValidDate}
+              value={date}
+            />
+            <Form.Control.Feedback type="invalid">
+              {dateErrMsg}
+            </Form.Control.Feedback>
+          </Form.Label>
+        </Form.Group>
+        <Form.Group>
+          <Form.Check type="checkbox" label="Urgent" onChange={handleUrgent} />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Notes</Form.Label>
+          <Form.Control placeholder="Notes"
+            onChange={handleNoteChange}
+          />
+        </Form.Group>
+        <TextButton text="Submit"
+          onClick={handleSubmit}
+          disabled={!isValidForm}
+          variant={
+            !isValidForm ? ButtonVariant.OUTLINEDANGER : ButtonVariant.PRIMARY
+          } />
 
-    </Form>
+      </Form>
     </div>
   )
 }
