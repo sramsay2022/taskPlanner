@@ -26,6 +26,7 @@ export default function Home() {
         <div>
             <NavBar/>
             <br/>
+            <h1>Welcome</h1>
             <div id="btn">
                 <TextButton
                     text="Create new task"
