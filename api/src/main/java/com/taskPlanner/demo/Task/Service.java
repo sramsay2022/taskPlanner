@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/status")
 public class Service {
 
-    @GetMapping
+    @GetMapping("/status")
     public String getStatus() {
         return "OK";
     }

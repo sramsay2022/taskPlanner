@@ -32,7 +32,7 @@ export default function Tasks() {
                     {tasks.map(({ id, name }) => {
                         return (
                             <ListGroup.Item key={id}>
-                                    {name}
+                                   <a href=""> {name}</a>
                                 <div className="deleteButtonWrapper">
                                     <IconButton
                                         icon={Icon.CROSS}
