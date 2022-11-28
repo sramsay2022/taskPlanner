@@ -16,7 +16,7 @@ export default function Home() {
     const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
-        authAxios.get("http://localhost:8080/status")
+        axios.get("http://localhost:8080/status")
         .then((response) => {
             console.log(response)
         })
